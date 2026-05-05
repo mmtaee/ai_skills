@@ -1,0 +1,42 @@
+# VCS
+.git
+.gitignore
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.python-version
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+
+# Local env and secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.pub
+id_rsa*
+
+# Tooling and reports
+.sonar/
+sonar-project.properties
+.vscode/
+.idea/
+*.log
+logs/
+
+# Tests and docs (not needed in runtime image)
+tests/
+**/tests/
+docs/
+README.md
+CHANGELOG.md
+
+# CI/Dev scripts not needed in runtime image
+Dockerfile*

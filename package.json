@@ -1,0 +1,22 @@
+{
+  "name": "@masoud/maha-skills",
+  "version": "1.0.0",
+  "description": "Installable skills for Maha Agent",
+  "main": "index.js",
+  "bin": {
+    "maha-skills": "bin/cli.js"
+  },
+  "files": [
+    "fastapi",
+    "registry.json",
+    "bin"
+  ],
+  "keywords": [
+    "maha",
+    "skills",
+    "agent",
+    "fastapi"
+  ],
+  "author": "",
+  "license": "ISC"
+}

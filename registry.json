@@ -1,0 +1,8 @@
+{
+  "frameworks": {
+    "fastapi": {
+      "path": "fastapi",
+      "skills": ["api-creator", "master-rules", "model-creator", "project-creator"]
+    }
+  }
+}
