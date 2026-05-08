@@ -2,7 +2,23 @@
   "frameworks": {
     "fastapi": {
       "path": "fastapi",
-      "skills": ["api-creator", "master-rules", "model-creator", "project-creator"]
+      "skills": [
+        "api-creator",
+        "master-rules",
+        "model-creator",
+        "project-creator"
+      ]
+    },
+    "echo": {
+      "path": "echo",
+      "skills": [
+        "api-creator",
+        "master-rules",
+        "middleware-creator",
+        "model-creator",
+        "model-unit-test-creator",
+        "project-creator"
+      ]
     }
   }
 }

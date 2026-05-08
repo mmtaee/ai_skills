@@ -8,14 +8,15 @@
   },
   "files": [
     "fastapi",
+    "echo",
     "registry.json",
     "bin"
   ],
   "keywords": [
-    "maha",
     "skills",
     "agent",
-    "fastapi"
+    "fastapi",
+    "echo"
   ],
   "author": "",
   "license": "ISC"
