@@ -1,6 +1,6 @@
-# Maha Skills
+# Skills
 
-A collection of installable skills for the Maha Agent, designed to automate and standardize project scaffolding, API creation, and rule enforcement.
+A collection of installable skills for the Agent, designed to automate and standardize project scaffolding, API creation, and rule enforcement.
 
 ## Repository Information
 
@@ -63,6 +63,10 @@ The repository is organized by framework:
 ```text
 .
 ├── fastapi/              # FastAPI specific skills
+│   ├── project-creator/
+│   ├── api-creator/
+│   └── ...
+├── echo/                 # Golang Echo specific skills
 │   ├── project-creator/
 │   ├── api-creator/
 │   └── ...
