@@ -54,14 +54,14 @@ description: Generate an efficient, human-friendly FastAPI backend scaffold usin
       shared/
         models.py
     scripts/
-      run.sh, coverage.sh, run_test.sh
+      run.sh, coverage.sh, run_test.sh, entrypoint.sh
     alembic/, config/, tests/
     pyproject.toml, README.md, .pre-commit-config.yaml, .env.sample, docker-compose.yml, Dockerfile, .gitlab-ci.yml, .coveragerc, .gitignore
 
 ## Creation Rules
 
 - Apply **Documentation & Code Style** and **In-Code Education** rules from `master-rules`.
-- Copy configuration files (`.dockerignore`, `.gitignore`, `.pre-commit-config.yaml`, `models.py`, `rate_limit.py`, `cache.py`) from `.agent/skills/project-creator/configs/`.
+- Copy configuration files (`.dockerignore`, `.gitignore`, `.pre-commit-config.yaml`, `.env.sample`, `models.py`, `rate_limit.py`, `cache.py`, `entrypoint.sh`) from `.agent/skills/project-creator/configs/`.
 - **Infrastructure Configuration**:
   - `config/settings.py`: Construct `DATABASE_URL` dynamically from environment variables using `pydantic-settings`. Settings must be **Cloud Native**: prioritize OS environment variables and only use `.env` files as an optional fallback for local development.
   - `config/database.py`: SQLAlchemy engine and session management.
@@ -73,6 +73,11 @@ description: Generate an efficient, human-friendly FastAPI backend scaffold usin
 
 - Apply **Architecture Standards (DDD & Clean Architecture)** from `master-rules`.
 - Use **RustFS** as the default S3-compatible object storage in `docker-compose.yml`.
+- **Docker Compose Environment**: Always use `${VAR_NAME}` syntax in `docker-compose.yml` to reference environment variables defined in `.env.sample`, ensuring consistency between the app configuration and infrastructure services.
+- **Service Dependencies**:
+  - The `app` service must wait for the database to be fully ready before starting (especially for migrations).
+  - Define a `healthcheck` for the `db` service (e.g., using `mariadb-admin ping` or `healthcheck.sh`).
+  - Set `depends_on` for the `app` service with `condition: service_healthy` for the `db` service.
 
 ## Documentation Rules
 
@@ -81,6 +86,10 @@ description: Generate an efficient, human-friendly FastAPI backend scaffold usin
 ## FastAPI Rules
 
 - Configure `main.py` with `custom_openapi`, `lifespan`, and routers.
+- **OpenAPI Configuration**:
+  - Implement `custom_openapi` to ensure `components` and `securitySchemes` exist in the schema.
+  - Set `swagger_ui_parameters={"persistAuthorization": True}` in the `FastAPI` constructor to maintain the auth token across page refreshes.
+  - Rely on FastAPI's automatic OpenAPI generation for `HTTPBearer` dependencies instead of manual security scheme injection.
 - Add health/readiness endpoints.
 - Use structured JSON logging.
 - Add middleware for request ID, tracing, and error handling.
@@ -94,6 +103,7 @@ description: Generate an efficient, human-friendly FastAPI backend scaffold usin
     - Allow extra fields when needed.
 - **Auth**: `pkg/auth/` (jwt, dependencies).
   - Implement **JWT Token Strategy** in `pkg/auth/jwt.py`.
+  - Use `HTTPBearer(bearerFormat="Bearer", scheme_name="BearerAuth", auto_error=True, description="...")` in `pkg/auth/dependencies.py`. This configuration allows FastAPI to automatically generate the correct security schemes and "Authorize" button in Swagger UI.
   - JWT must support a **claims type** (extensible dictionary) to allow adding custom fields to the token payload.
   - Include token generation (`encode`) and validation/decoding (`decode`) logic.
 - **Validators**: `pkg/validators/` (standard naming, one file per validator).
@@ -106,8 +116,14 @@ description: Generate an efficient, human-friendly FastAPI backend scaffold usin
 
 - Apply **Implementation Rules (Database & Redis)** from `master-rules`.
 
+## Docker Rules
+
+- Use `scripts/entrypoint.sh` as the `ENTRYPOINT` or `CMD` in `Dockerfile`.
+- Ensure the entrypoint script runs migrations before starting the server.
+- Make the entrypoint script executable in the `Dockerfile`.
+
 ## Git Workflow
-}
+
 - Apply the **Git Workflow** from `master-rules`.
 
 ## Finalization
