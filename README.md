@@ -4,8 +4,8 @@ A collection of installable skills for the Maha Agent, designed to automate and 
 
 ## Repository Information
 
-- **URL:** `https://hamgit.ir/maha/skills.git`
-- **SSH:** `git@hamgit.ir:maha/skills.git`
+- **URL:** `https://github.com/mmtaee/ai_skills.git`
+- **SSH:** `git@github.com:mmtaee/ai_skills.git`
 
 ---
 
@@ -19,12 +19,12 @@ This is the fastest way to install the skills directly into your project's `.age
 
 #### Install all skills:
 ```bash
-npx skills add git@hamgit.ir:maha/skills.git
+npx skills add git@github.com:mmtaee/ai_skills.git
 ```
 
 #### Install only specific framework skills (e.g., FastAPI):
 ```bash
-npx skills add git@hamgit.ir:maha/skills.git fastapi
+npx skills add git@github.com:mmtaee/ai_skills.git fastapi
 ```
 
 This will:
@@ -38,7 +38,7 @@ If you want to keep the skills synchronized with the repository, you can add it 
 
 #### Add as submodule:
 ```bash
-git submodule add git@hamgit.ir:maha/skills.git .agent/skills
+git submodule add git@github.com:mmtaee/ai_skills.git .agent/skills
 ```
 
 #### Note on Submodule Usage:
