@@ -13,11 +13,13 @@
       "path": "echo",
       "skills": [
         "api-creator",
+        "integration-test-creator",
         "master-rules",
         "middleware-creator",
         "model-creator",
         "model-unit-test-creator",
-        "project-creator"
+        "project-creator",
+        "unit-test-creator"
       ]
     }
   }
